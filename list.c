@@ -52,19 +52,71 @@ void addLast(ListType *list, TaskType *data) {
     list->size++;
 }
 
-// BEFORE FINISHING REMOVE FUNCTION, MUST IMPLEMENT HASH ID FUNCTION SO THAT WE CAN SEARCH BY IT
+char* find(ListType *list, char* name){
+    if(list->size==0){
+        return NULL;
+    }
+    else if(list->size==1){
+        if(strcmp(list->head->data->name, name)==0){
+            return list->head->data->id;
+        }
+        else{
+            return NULL;
+        }
+    }
+    else{
+        NodeType* temp=list->head;
+        while(temp!=NULL){
+            if(strcmp(temp->data->name, name)==0){
+                return temp->data->id;
+            }
+            temp=temp->next;
+        }
+        return NULL;
+    }
+}
 
-// int remove(ListType *list, char* id){
-//     if(list->size==0){
-//         return FALSE;
-//     }
-//     else if(list->size==1){
-//         list->head=NULL;
-//         list->tail=NULL;
-//         list->size--;
-//         void* temp=list->head->data;
-//         free(list->head->data);
-//         free(list->head);
-//     }
-    
-// }
+int listremove(ListType *list, char* id){
+    if(list->size==0 || !id){
+        return FALSE;
+    }
+    else if(list->size==1){
+        list->head=NULL;
+        list->tail=NULL;
+        list->size--;
+        void* temp=list->head->data;
+        free(list->head->data);
+        free(list->head);
+        return TRUE;
+    }
+    NodeType* temp=list->head;
+    while(temp!=NULL){
+        if(strcmp(temp->data->id, id)==0){
+            if(temp==list->head){
+                list->head=list->head->next;
+                list->head->prev=NULL;
+                list->size--;
+                free(temp->data);
+                free(temp);
+                return TRUE;
+            }
+            else if(temp==list->tail){
+                list->tail=list->tail->prev;
+                list->tail->next=NULL;
+                list->size--;
+                free(temp->data);
+                free(temp);
+                return TRUE;
+            }
+            else{
+                temp->prev->next=temp->next;
+                temp->next->prev=temp->prev;
+                list->size--;
+                free(temp->data);
+                free(temp);
+                return TRUE;
+            }
+        }
+        temp=temp->next;
+    } 
+}

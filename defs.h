@@ -14,7 +14,7 @@ typedef struct List ListType;
 typedef struct Task TaskType;
 
 struct Node {
-    void* data;
+    TaskType *data;
     NodeType *next;
     NodeType *prev;
 };
@@ -36,11 +36,12 @@ void add(ListType *list, TaskType* data);
 void addFirst(ListType *list, TaskType* data);
 void addLast(ListType *list, TaskType* data);
 
-int removef(ListType *, char *);
+
+int listRemove(ListType *, char*);
 int removeFirst(ListType *list);
 int removeLast(ListType *list);
 
-char* find(ListType *list, TaskType *data);
+char* find(ListType *list, char *name);
 TaskType* getFirst(ListType *list);
 TaskType* getLast(ListType *list);
 
