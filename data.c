@@ -37,3 +37,11 @@ void printTask(TaskType *task){
     printf("Total: %d\n", task->total);
     //printf("Start: %s\n", ctime(&task->start));
 }
+
+void printTaskList(ListType *list){
+    NodeType *temp = list->head;
+    while(temp!=NULL){
+        printTask(temp->data);
+        temp = temp->next;
+    }
+}

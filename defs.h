@@ -6,7 +6,7 @@
 #define TRUE 1
 #define FALSE 0
 
-#define MAX_STR 40
+#define MAX_STR 20
 #define MAX_ID 7
 
 typedef struct Node NodeType;
@@ -38,8 +38,8 @@ void addLast(ListType *list, TaskType* data);
 
 
 int listRemove(ListType *, char*);
-int removeFirst(ListType *list);
-int removeLast(ListType *list);
+// int removeFirst(ListType *list);
+// int removeLast(ListType *list);
 
 char* find(ListType *list, char *name);
 TaskType* getFirst(ListType *list);
@@ -54,3 +54,4 @@ void initTask(TaskType *task, char *name, int total, time_t start);
 void genId(int length, char *randomString);
 void cleanData(TaskType *task);
 void printTask(TaskType *task);
+void printTaskList(ListType *list);

@@ -76,17 +76,17 @@ char* find(ListType *list, char* name){
     }
 }
 
-int listremove(ListType *list, char* id){
+int listRemove(ListType *list, char* id){
     if(list->size==0 || !id){
         return FALSE;
     }
     else if(list->size==1){
-        list->head=NULL;
-        list->tail=NULL;
+        NodeType *temp=list->head->data;
         list->size--;
-        void* temp=list->head->data;
         free(list->head->data);
         free(list->head);
+        list->head=NULL;
+        list->tail=NULL;
         return TRUE;
     }
     NodeType* temp=list->head;
@@ -119,4 +119,26 @@ int listremove(ListType *list, char* id){
         }
         temp=temp->next;
     } 
+}
+
+TaskType* getFirst(ListType *list){
+    if(list->size==0){
+        return NULL;
+    }
+    else{
+        return list->head->data;
+    }
+}
+
+TaskType* getLast(ListType *list){
+    if(list->size==0){
+        return NULL;
+    }
+    else{
+        return list->tail->data;
+    }
+}
+
+int size(ListType *list) {
+    return list->size;
 }
