@@ -30,5 +30,6 @@ int main(){
     add(list, task3);
     printTask(getLast(list));
     printTask(getFirst(list));
+    
     return 0;
 }
