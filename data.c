@@ -29,13 +29,31 @@ void initTask(TaskType *task, char *name, int total, time_t start){
     strcpy(task->name, name);
     task->total = total;
     task->start = start;
+    task->tracking = FALSE;
+}
+// cant use scanf for strings with spaces NEED TO FIX, USE BUFFER THING
+void getTaskInput(TaskType *task){
+    char name[MAX_STR];
+    int total;
+    printf("\nEnter task name: ");
+    scanf("%s", name);
+    printf("\nEnter pre-existing time spent on task, if any (input 0 if none): \n");
+    scanf("%d", &total);
+    initTask(task, name, total, time(NULL));
 }
 
 void printTask(TaskType *task){
-    printf("ID: %s\n", task->id);
-    printf("Name: %s\n", task->name);
-    printf("Total: %d\n", task->total);
-    //printf("Start: %s\n", ctime(&task->start));
+    char id[MAX_ID+1];
+    switch(task->tracking){
+        case TRUE:
+            strcpy(id, "[TRUE]");
+            char* time = ctime(&task->start);
+        case FALSE:
+            strcpy(id, "[FALSE]");
+    }
+    // conver to time format 
+
+    printf("ID: %7.7s | Name: %20.20s | Total: %d | Tracking Since: %s", task->id, task->name, task->total, ctime(&task->start));
 }
 
 void printTaskList(ListType *list){
@@ -44,4 +62,8 @@ void printTaskList(ListType *list){
         printTask(temp->data);
         temp = temp->next;
     }
+}
+
+void cleanData(TaskType *task){
+    free(task);
 }

@@ -30,6 +30,7 @@ struct Task{
     char name[MAX_STR];
     int  total;
     time_t start;
+    unsigned char tracking;
 };
 
 void add(ListType *list, TaskType* data);

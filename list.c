@@ -142,3 +142,19 @@ TaskType* getLast(ListType *list){
 int size(ListType *list) {
     return list->size;
 }
+
+void cleanList(ListType *list) {
+    NodeType *temp = list->head;
+    while (temp != NULL) {
+        NodeType *next = temp->next;
+        // free TaskType
+        cleanData(temp->data);
+        // free NodeType
+        free(temp);
+        temp = next;
+    }
+    list->head = NULL;
+    list->tail = NULL;
+    list->size = 0;
+    free(list);
+}
